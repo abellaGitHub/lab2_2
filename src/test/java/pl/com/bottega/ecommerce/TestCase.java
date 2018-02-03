@@ -31,4 +31,27 @@ public class TestCase {
         Money money2 = new Money(100, "PLN");
         money1.add(money2);
     }
+
+    @Test
+    public void moneySubtractDefaultCurrencies() {
+        Money money1 = new Money(200);
+        Money money2 = new Money(100);
+
+        assertThat(money1.subtract(money2), Matchers.is(new Money(100)));
+    }
+
+    @Test
+    public void moneySubtractSpecifiedCurrencies() {
+        Money money1 = new Money(200, "EUR");
+        Money money2 = new Money(100, "EUR");
+
+        assertThat(money1.subtract(money2), Matchers.is(new Money(100, "EUR")));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void moneySubtractDifferentCurrencies() {
+        Money money1 = new Money(100, "EUR");
+        Money money2 = new Money(100, "PLN");
+        money1.subtract(money2);
+    }
 }
