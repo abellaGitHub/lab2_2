@@ -72,4 +72,32 @@ public class TestCase {
         assertThat(money1.multiplyBy(new BigDecimal(10)), Matchers.is(new Money(100, "PLN")));
         assertThat(money1.multiplyBy(10), Matchers.is(new Money(100, "PLN")));
     }
+
+    @Test
+    public void moneyIsGreaterThan() {
+        Money money1 = new Money(200);
+        Money money2 = new Money(100);
+
+        assertThat(money1.greaterThan(money2), Matchers.is(true));
+        assertThat(money2.greaterThan(money1), Matchers.is(false));
+    }
+
+    @Test
+    public void moneyIsLessThan() {
+        Money money1 = new Money(200);
+        Money money2 = new Money(100);
+
+        assertThat(money2.lessThan(money1), Matchers.is(true));
+        assertThat(money1.lessThan(money2), Matchers.is(false));
+    }
+
+    @Test
+    public void moneyIsLessOrEquals() {
+        Money money1 = new Money(200);
+        Money money2 = new Money(100);
+
+        assertThat(money2.lessOrEquals(money1), Matchers.is(true));
+        assertThat(money1.lessOrEquals(money2), Matchers.is(false));
+        assertThat(money1.lessOrEquals(money1), Matchers.is(true));
+    }
 }
