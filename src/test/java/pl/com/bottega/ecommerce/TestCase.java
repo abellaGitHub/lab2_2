@@ -2,6 +2,8 @@ package pl.com.bottega.ecommerce;
 
 import static org.junit.Assert.assertThat;
 
+import java.math.BigDecimal;
+
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
@@ -53,5 +55,21 @@ public class TestCase {
         Money money1 = new Money(100, "EUR");
         Money money2 = new Money(100, "PLN");
         money1.subtract(money2);
+    }
+
+    @Test
+    public void moneyMultiplyDefaultCurrencies() {
+        Money money1 = new Money(10);
+
+        assertThat(money1.multiplyBy(new BigDecimal(10)), Matchers.is(new Money(100)));
+        assertThat(money1.multiplyBy(10), Matchers.is(new Money(100)));
+    }
+
+    @Test
+    public void moneyMultiplySpecifiedCurrencies() {
+        Money money1 = new Money(10, "PLN");
+
+        assertThat(money1.multiplyBy(new BigDecimal(10)), Matchers.is(new Money(100, "PLN")));
+        assertThat(money1.multiplyBy(10), Matchers.is(new Money(100, "PLN")));
     }
 }
